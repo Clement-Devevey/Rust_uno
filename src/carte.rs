@@ -1,5 +1,5 @@
-pub mod couleur;
-pub use couleur::Couleur;
+
+pub use crate::couleur::Couleur;
 
 pub struct Carte {
     pub couleur: Couleur,
@@ -11,3 +11,4 @@ impl Carte {
         print!("Valeur: {} - Couleur: {}\n", self.numero, self.couleur);
     }
 }
+

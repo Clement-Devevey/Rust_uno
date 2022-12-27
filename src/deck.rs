@@ -1,6 +1,5 @@
-pub mod carte;
-use carte::{Carte, Couleur};
-
+use crate::carte::{Carte, Couleur};
+use crate::defausse::Defausse;
 use rand::thread_rng;
 use rand::seq::SliceRandom;
 
@@ -33,5 +32,9 @@ impl Deck {
             Some(carte) => carte,
             None => panic!("No more card in deck"),
         }
+    }
+
+    pub fn build_from_defausse(&mut self, defausse: &mut Defausse) {
+        std::mem::swap(&mut self.cartes, &mut defausse.cartes);
     }
 }
