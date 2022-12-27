@@ -2,6 +2,6 @@
 Uno made in Rust
 
 ## Todo
-- [ ] Ajouter cartes spécialies
+- [ ] Ajouter cartes spéciales
 - [ ] Implémenter Joueurs
 - [ ] Implémenter Défausse
