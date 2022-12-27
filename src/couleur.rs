@@ -1,5 +1,4 @@
 use std::fmt;
-
 pub enum Couleur{
     Bleu,
     Jaune,

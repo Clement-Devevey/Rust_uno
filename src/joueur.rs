@@ -1,5 +1,5 @@
 use crate::carte::Carte;
-use super::Deck;
+use crate::deck::Deck;
 
 pub struct Joueur {
     pub main: Vec<Carte>,
@@ -23,6 +23,7 @@ impl Joueur {
         for c in self.main.iter() {
             c.display();
         }
+        print!("\n");
     }
 
     pub fn display_score(& self) {

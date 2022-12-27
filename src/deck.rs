@@ -21,6 +21,7 @@ impl Deck {
         for carte in &self.cartes {
             carte.display();
         }
+        print!("\n");
     }
 
     pub fn shuffle(& mut self) {
