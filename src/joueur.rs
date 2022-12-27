@@ -9,7 +9,7 @@ pub struct Joueur {
 
 impl Joueur {
     pub fn build_main(&mut self, deck: &mut Deck) {
-        if self.main.is_empty() {
+        if !self.main.is_empty() {
             self.main.clear();
         }
 
