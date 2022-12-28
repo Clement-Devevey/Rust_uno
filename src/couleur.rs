@@ -1,9 +1,18 @@
 use std::fmt;
+#[derive(PartialEq)] //for == operator
 pub enum Couleur{
     Bleu,
     Jaune,
     Rouge,
     Vert,
+}
+
+impl Copy for Couleur { }
+
+impl Clone for Couleur {
+    fn clone(&self) -> Couleur {
+        *self
+    }
 }
 
 impl fmt::Display for Couleur {

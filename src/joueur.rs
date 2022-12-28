@@ -29,4 +29,15 @@ impl Joueur {
     pub fn display_score(& self) {
         println!("Score of player {} is {}", self.nom, self.score);
     }
+
+    pub fn choice_is_playable(&mut self, choix: &usize, last_card_played: &Carte) -> bool {
+        if self.main[*choix].is_playable(last_card_played) {
+            println!("Choix est OK");
+            return true;
+        }
+        else {
+            println!("Choix n'est pas OK");
+            return false;
+        }
+    }
 }

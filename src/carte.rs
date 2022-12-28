@@ -6,6 +6,14 @@ pub struct Carte {
     pub numero: i8,
 }
 
+impl Copy for Carte { }
+
+impl Clone for Carte {
+    fn clone(&self) -> Carte {
+        *self
+    }
+}
+
 impl Carte {
     pub fn display(&self) {
         match self.couleur {
@@ -15,7 +23,19 @@ impl Carte {
             Couleur::Vert => print!("{}", self.numero.to_string().green().on_black()),
         }
         print!(" ");
-        //print!("Valeur: {} - Couleur: {}\n", self.numero, self.couleur);
+    }
+
+    pub fn is_playable(&self, carte: & Carte) -> bool {
+        if self.couleur == carte.couleur {
+            return true;
+        }
+        else if self.numero == carte.numero {
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 }
 
