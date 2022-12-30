@@ -8,21 +8,23 @@ pub struct Deck {
 }
 
 impl Deck {
+    fn push_all_colors (& mut self, value: &String) {
+        self.cartes.push(Carte { couleur: Couleur::Bleu, numero: value.clone() });
+        self.cartes.push(Carte { couleur: Couleur::Rouge, numero: value.clone() });
+        self.cartes.push(Carte { couleur: Couleur::Jaune, numero: value.clone() });
+        self.cartes.push(Carte { couleur: Couleur::Vert, numero: value.clone() });  
+    }
+
     pub fn build_deck(& mut self) {
         // Chaque carte numérotée en deux exemplaires sauf le 0
         for _i in 0..2 {
             for j in 1..10 {
-                self.cartes.push(Carte { couleur: Couleur::Bleu, numero: j.to_string() });
-                self.cartes.push(Carte { couleur: Couleur::Rouge, numero: j.to_string() });
-                self.cartes.push(Carte { couleur: Couleur::Jaune, numero: j.to_string() });
-                self.cartes.push(Carte { couleur: Couleur::Vert, numero: j.to_string() });
+                self.push_all_colors(&j.to_string());
             }
         }
         // une carte 0 de chaque couleur
-        self.cartes.push(Carte { couleur: Couleur::Bleu, numero: "0".to_string() });
-        self.cartes.push(Carte { couleur: Couleur::Rouge, numero: "0".to_string() });
-        self.cartes.push(Carte { couleur: Couleur::Jaune, numero: "0".to_string() });
-        self.cartes.push(Carte { couleur: Couleur::Vert, numero: "0".to_string() });
+        self.push_all_colors(&"0".to_string());
+
         // 4 cartes spéciales de chaque (changement couleur, +4, changement de sens)
         for _i in 0..4 {
             self.cartes.push(Carte { couleur: Couleur::Noir, numero: "c".to_string() });
@@ -32,20 +34,13 @@ impl Deck {
         // 2 "+2" et sens et saute tour de chaque couleur
         for _i in 0..2 {
             // carte +2
-            self.cartes.push(Carte { couleur: Couleur::Bleu, numero: "+2".to_string() });
-            self.cartes.push(Carte { couleur: Couleur::Rouge, numero: "+2".to_string() });
-            self.cartes.push(Carte { couleur: Couleur::Jaune, numero: "+2".to_string() });
-            self.cartes.push(Carte { couleur: Couleur::Vert, numero: "+2".to_string() });
+            self.push_all_colors(&"+2".to_string());
+
             //carte sens
-            self.cartes.push(Carte { couleur: Couleur::Bleu, numero: "s".to_string() });
-            self.cartes.push(Carte { couleur: Couleur::Rouge, numero: "s".to_string() });
-            self.cartes.push(Carte { couleur: Couleur::Jaune, numero: "s".to_string() });
-            self.cartes.push(Carte { couleur: Couleur::Vert, numero: "s".to_string() });
+            self.push_all_colors(&"s".to_string());
+
             //carte saute tour
-            self.cartes.push(Carte { couleur: Couleur::Bleu, numero: "t".to_string() });
-            self.cartes.push(Carte { couleur: Couleur::Rouge, numero: "t".to_string() });
-            self.cartes.push(Carte { couleur: Couleur::Jaune, numero: "t".to_string() });
-            self.cartes.push(Carte { couleur: Couleur::Vert, numero: "t".to_string() });
+            self.push_all_colors(&"t".to_string());
         }
     }
 

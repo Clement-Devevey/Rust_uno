@@ -8,12 +8,12 @@ use gestionnaire_de_jeu::GestionnaireDeJeu;
 
 use crate::gestionnaire_de_jeu::build_gestionnaire_jeu;
 
-const NB_OF_CARDS: u8 = 108;
+const NB_CARDS: u8 = 108;
 
 fn main() {
     let mut gestionnaire_jeu: GestionnaireDeJeu = build_gestionnaire_jeu(
         Vec::new(),
-        Vec::with_capacity(NB_OF_CARDS.try_into().unwrap()),
+        Vec::with_capacity(NB_CARDS.try_into().unwrap()),
         Vec::new()
     );
 
