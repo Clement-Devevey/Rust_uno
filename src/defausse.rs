@@ -13,7 +13,7 @@ impl Defausse {
         print!("\n");
     }
 
-    pub fn last_card_played(& self) -> &Carte {
-        return &self.cartes[self.cartes.len() - 1];
+    pub fn last_card_played(& self) -> Carte {
+        return self.cartes[self.cartes.len() - 1];
     }
 }
