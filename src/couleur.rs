@@ -5,6 +5,7 @@ pub enum Couleur{
     Jaune,
     Rouge,
     Vert,
+    Noir,
 }
 
 impl Copy for Couleur { }
@@ -22,6 +23,7 @@ impl fmt::Display for Couleur {
             Couleur::Jaune => write!(f, "Jaune"),
             Couleur::Rouge => write!(f, "Rouge"),
             Couleur::Vert => write!(f, "Vert"),
+            Couleur::Noir => write!(f, "Spécial"),
         }
     }
 }

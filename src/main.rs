@@ -8,7 +8,7 @@ use gestionnaire_de_jeu::GestionnaireDeJeu;
 
 use crate::gestionnaire_de_jeu::build_gestionnaire_jeu;
 
-const NB_OF_CARDS: i8 = 40;
+const NB_OF_CARDS: u8 = 108;
 
 fn main() {
     let mut gestionnaire_jeu: GestionnaireDeJeu = build_gestionnaire_jeu(
@@ -21,6 +21,8 @@ fn main() {
     println!("Création du Deck");
     gestionnaire_jeu.build_deck();
 
+    gestionnaire_jeu.display_deck();
+
     gestionnaire_jeu.shuffle_deck();
 
     gestionnaire_jeu.get_number_of_players();
@@ -31,23 +33,50 @@ fn main() {
 
     println!("Début de la partie");
 
+    // Tant qu'aucun des joueurs n'a plus de cartes
     loop {
-
+        let mut saute_tour = false;
+        // Tant que l'utilisateur n'a pas rentré un choix correct
         loop {
             gestionnaire_jeu.display_last_card_played();
 
             gestionnaire_jeu.display_player_main();
 
-            let choice = gestionnaire_jeu.get_player_choice();
+            let mut choice = gestionnaire_jeu.get_player_choice();
 
             if choice == 0 {
                 gestionnaire_jeu.draw_card();
                 break;
             }
             else if choice > 0 && choice < gestionnaire_jeu.nb_card_player() + 1 {
-                if gestionnaire_jeu.check_play(choice - 1) {
-                    break;
+                choice -= 1;
+                // On vérifie que la carte est jouable et on récupère son numéro
+                let num_card_played = gestionnaire_jeu.check_play(choice);
+
+                if num_card_played == "+4" {
+                    gestionnaire_jeu.plus_quatre(choice);
                 }
+                else if num_card_played == "c" {
+                    gestionnaire_jeu.change_couleur(choice);
+                }
+                else if num_card_played == "+2" {
+                    gestionnaire_jeu.plus_deux();
+                }
+                else if num_card_played == "s" {
+                    gestionnaire_jeu.change_sens();
+                }
+                else if num_card_played == "t" {
+                    saute_tour = true;
+                }
+                else if num_card_played == "" {
+                    println!("Carte non jouable!");
+                    continue;
+                }
+
+                gestionnaire_jeu.remove_card_played(choice);
+
+                // Sort de la boucle
+                break;
             }
             else {
                 println!("Wrong choice");
@@ -59,31 +88,10 @@ fn main() {
             break;
         }
         else {
+            if saute_tour {
+                gestionnaire_jeu.saute_tour();
+            }
             gestionnaire_jeu.next_player();
         }
     }
-
-
-
-    // println!("Quelle carte souhaites tu jouer ?");
-    // let mut choix: usize;
-    // scan!("{}", choix);
-    // choix-=1;
-    
-    // println!("Carte sélectionnée:");
-    // joueurs[0].main[choix].display();
-    // print!("\n");
-
-    // if joueurs[0].choice_is_playable(&choix, &mut defausse.last_card_played()) {
-    //     println!("Choix OK");
-    //     defausse.ajouter_carte(&joueurs[0].main.remove(choix));
-    // }
-
-    // println!("Dernière carte jouée:");
-    // defausse.display_last_card();
-
-    // for joueur in joueurs.iter() {
-    //     joueur.display_main();
-    // }
-
 }
